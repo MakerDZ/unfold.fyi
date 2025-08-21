@@ -1,0 +1,27 @@
+{
+  "name": "unfold",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "commit": "cz-customizable",
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "start": "next start",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "dependencies": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "next": "15.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@tailwindcss/postcss": "^4",
+    "cz-customizable": "^7.0.0",
+    "prettier": "^3.5.3",
+    "tailwindcss": "^4"
+  }
+}
