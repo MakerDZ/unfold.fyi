@@ -9,12 +9,12 @@ export default function AboutEnvelope() {
     return (
         <div className="w-full h-screen bg-locked-primary">
             {/* Mobile Layout */}
-            <div className="md:hidden h-screen  flex flex-col px-4 ">
-                <div className="w-full flex justify-center">
+            <div className="md:hidden min-h-screen w-full flex flex-col px-2 min-[320px]:px-4">
+                <div className="w-full flex justify-center pt-4 min-[320px]:pt-6">
                     <Logo />
                 </div>
                 <motion.div
-                    className="sm:w-6/12 w-8/12 mx-auto my-10"
+                    className="w-[200px] min-[320px]:w-[250px] mx-auto my-6 min-[320px]:my-9"
                     animate={{
                         y: [0, -10, 0],
                         scale: [1, 1.02, 1],
@@ -45,29 +45,29 @@ export default function AboutEnvelope() {
                         className="w-full h-full object-cover object-center"
                     />
                 </motion.div>
-                <div>
-                    <div className="w-full px-6 sm:px-8 py-8 sm:py-12">
+                <div className="w-full flex-1">
+                    <div className="w-full px-2 min-[320px]:px-4 sm:px-8 py-4 min-[320px]:py-6 sm:py-12">
                         <div className="mb-5 relative">
                             <Image
                                 src="https://avatars.githubusercontent.com/u/87943692?v=4"
                                 alt="Profile Picture"
                                 width={110}
                                 height={110}
-                                className="rounded-full w-[70px] h-[70px] xs:w-[80px] xs:h-[80px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px]"
+                                className="rounded-full w-[60px] h-[60px] min-[320px]:w-[70px] min-[320px]:h-[70px] sm:w-[90px] sm:h-[90px] md:w-[110px] md:h-[110px]"
                             />
                             {/* Letter Section */}
-                            <div className="max-w-[150px] min-[290px]:max-w-[220px] sm:max-w-[300px] md:max-w-[280px] min-w-[140px] min-[290px]:min-w-[180px] sm:min-w-[240px] md:min-w-[208px] -rotate-6 bg-[#F9DEB2] rounded-xl absolute top-0 left-16 min-[290px]:left-24 sm:left-32 md:left-36 flex flex-row items-center justify-center p-1.5 min-[290px]:p-2">
-                                <div className="text-[11px] min-[290px]:text-xs sm:text-sm md:text-md relative w-full text-[#5A4B34] border-2 border-dashed border-[#E4B87B] rounded-lg py-1 min-[290px]:py-1.5 px-2 min-[290px]:px-2.5 break-words whitespace-pre-wrap">
+                            <div className="max-w-[150px] min-[320px]:max-w-[180px] sm:max-w-[300px] md:max-w-[280px] min-w-[140px] min-[320px]:min-w-[160px] sm:min-w-[240px] md:min-w-[208px] -rotate-6 bg-[#F9DEB2] rounded-xl absolute top-0 left-16 min-[320px]:left-20 sm:left-32 md:left-36 flex flex-row items-center justify-center p-1.5 min-[320px]:p-2">
+                                <div className="text-xs sm:text-sm md:text-md relative w-full text-[#5A4B34] border-2 border-dashed border-[#E4B87B] rounded-lg py-1.5 px-2.5 break-words whitespace-pre-wrap">
                                     <span>
                                         <Image
                                             src="/images/letter-icon.png"
                                             alt="Letter"
                                             width={20}
                                             height={20}
-                                            className="absolute top-1 left-1.5 w-3.5 h-3.5 min-[290px]:w-4 min-[290px]:h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
+                                            className="absolute top-1 left-2 w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
                                         />
                                     </span>
-                                    <p className="pl-5 min-[290px]:pl-6 sm:pl-7">
+                                    <p className="pl-6 sm:pl-7">
                                         Lorem ipsum dolor sit amet consectetur
                                         adipisicing elit. Quisquam, quos.
                                     </p>
@@ -77,7 +77,7 @@ export default function AboutEnvelope() {
                                     alt="Letter"
                                     width={25}
                                     height={25}
-                                    className="absolute bottom-1.5 min-[290px]:bottom-2 sm:bottom-3 right-1.5 min-[290px]:right-2 sm:right-3 w-4 h-4 min-[290px]:w-5 min-[290px]:h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
+                                    className="absolute bottom-2 sm:bottom-3 right-2 sm:right-3 w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8"
                                 />
                             </div>
                         </div>

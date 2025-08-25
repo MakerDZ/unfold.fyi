@@ -1,0 +1,183 @@
+'use client';
+
+import Image from 'next/image';
+import { OverlappingCardsSection } from '../ui/photoframe';
+import { type MediaItem } from '../ui/photoframe';
+import { Play, Pause, SkipBack, SkipForward } from 'lucide-react';
+import { useState } from 'react';
+
+const mediaItems: MediaItem[] = [
+    {
+        url: 'https://avatars.githubusercontent.com/u/720186?v=4',
+        type: 'image' as const,
+        alt: 'Digital clock display',
+        overlay: {
+            clock: {
+                time: '16:25',
+                date: '2023/10/24',
+                day: 'Tue',
+                label: 'GeekWall',
+            },
+        },
+    },
+    {
+        url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
+        type: 'image' as const,
+        alt: 'Racing game with cars',
+    },
+    {
+        url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
+        type: 'image' as const,
+        alt: 'Futuristic control room',
+    },
+];
+
+export default function ViewingEnvelope() {
+    const [isPlaying, setIsPlaying] = useState(false);
+
+    return (
+        <div className="w-full h-screen bg-locked-primary flex flex-col overflow-hidden">
+            {/* Header Section - Mobile Only */}
+            <div className="w-full h-16 flex flex-row justify-between items-center px-4 md:hidden">
+                <Image
+                    src="/images/logo.png"
+                    alt="Logo"
+                    width={38}
+                    height={38}
+                />
+                <p className="text-lg font-bold font-itim text-[#6B4D2E]">
+                    Unfold FYI
+                </p>
+                <div className="w-10 h-10 "></div>
+            </div>
+
+            {/* Sticky Image Section */}
+            <div className="w-full px-4 md:px-8 lg:px-12 md:pt-12 pt-8 bg-locked-primary sticky top-0 z-10">
+                <OverlappingCardsSection
+                    mediaItems={mediaItems}
+                    onMediaClick={(index) => {
+                        console.log(`Clicked media ${index}`);
+                    }}
+                />
+            </div>
+
+            {/* Scrollable Reading Section */}
+            <div className="flex-1 overflow-y-auto">
+                <div className="px-4 md:px-8 lg:px-12 pb-8">
+                    <div className="max-w-3xl mx-auto space-y-6 text-[#6B4D2E]">
+                        <h1 className="text-2xl md:text-3xl font-bold mb-6">
+                            Dear Future Self,
+                        </h1>
+
+                        <p className="text-lg leading-relaxed">
+                            As I write this letter, I find myself reflecting on
+                            the journey that brought me here. The late nights
+                            coding, the countless debugging sessions, and the
+                            moments of pure joy when everything finally clicked
+                            into place.
+                        </p>
+
+                        <p className="text-lg leading-relaxed">
+                            Remember that first project? The one where we stayed
+                            up until 4 AM, fueled by coffee and determination,
+                            just to get that one feature working perfectly. It
+                            wasn't just about the code – it was about proving to
+                            ourselves that we could do it.
+                        </p>
+
+                        <p className="text-lg leading-relaxed">
+                            Looking at these photos now, each one tells a story.
+                            The digital clock display reminds me of our
+                            obsession with precision and timing. The racing game
+                            screenshot captures our love for optimization and
+                            performance. And that control room setup? It's a
+                            testament to how far we've come in creating
+                            intuitive interfaces.
+                        </p>
+
+                        <p className="text-lg leading-relaxed">
+                            I hope you're still pushing boundaries and
+                            challenging yourself. Don't forget the excitement of
+                            learning something new, the satisfaction of solving
+                            complex problems, and the joy of creating something
+                            meaningful.
+                        </p>
+
+                        <p className="text-lg leading-relaxed">
+                            Keep building, keep learning, and most importantly,
+                            keep enjoying the process. The best code isn't just
+                            functional – it's a form of self-expression, a way
+                            to make our mark on the digital world.
+                        </p>
+
+                        <p className="text-lg leading-relaxed mb-8">
+                            And remember, whenever you feel stuck or
+                            overwhelmed, take a step back, put on your favorite
+                            coding playlist (yes, the one playing right now),
+                            and remind yourself why you fell in love with
+                            programming in the first place.
+                        </p>
+
+                        <p className="text-lg font-semibold">
+                            Best regards,
+                            <br />
+                            Your Past Self
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            {/* Fixed Music Player */}
+            <div className="w-full bg-[#F8E3C5] border-t border-[#F3D5A7] p-4 fixed bottom-0 left-0 right-0">
+                <div className="max-w-3xl mx-auto flex items-center gap-4">
+                    {/* Thumbnail */}
+                    <div className="w-12 h-12 rounded-lg overflow-hidden bg-[#F3D5A7] flex-shrink-0">
+                        <Image
+                            src="/images/letter-icon.png"
+                            alt="Now playing"
+                            width={48}
+                            height={48}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+
+                    {/* Controls */}
+                    <div className="flex-1">
+                        <div className="flex items-center justify-center gap-4">
+                            <button className="p-2 text-[#6B4D2E] hover:text-[#8B6D4E] transition-colors">
+                                <SkipBack className="w-5 h-5" />
+                            </button>
+                            <button
+                                className="p-3 bg-[#F3D5A7] rounded-full text-[#6B4D2E] hover:bg-[#E3C597] transition-colors"
+                                onClick={() => setIsPlaying(!isPlaying)}
+                            >
+                                {isPlaying ? (
+                                    <Pause className="w-6 h-6" />
+                                ) : (
+                                    <Play className="w-6 h-6" />
+                                )}
+                            </button>
+                            <button className="p-2 text-[#6B4D2E] hover:text-[#8B6D4E] transition-colors">
+                                <SkipForward className="w-5 h-5" />
+                            </button>
+                        </div>
+                        {/* Progress Bar */}
+                        <div className="mt-2 h-1 bg-[#F3D5A7] rounded-full">
+                            <div
+                                className="h-full w-1/3 bg-[#6B4D2E] rounded-full"
+                                style={{
+                                    transition: 'width 0.1s linear',
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    {/* Time */}
+                    <div className="text-sm text-[#6B4D2E] font-medium">
+                        2:45
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+}
