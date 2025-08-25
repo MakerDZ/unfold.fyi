@@ -35,17 +35,22 @@ export function OverlappingCardsSection({
     const [selectedIndex, setSelectedIndex] = useState<number>(0);
     const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-    const renderMedia = (item: MediaItem, key: string) => {
+    const renderMedia = (
+        item: MediaItem,
+        key: string,
+        isDialog: boolean = false
+    ) => {
         if (item.type === 'video') {
             return (
                 <video
                     key={key}
                     src={item.url}
                     className="w-full h-full object-cover"
-                    controls={false}
-                    muted
+                    controls={isDialog}
+                    muted={!isDialog}
                     loop
-                    autoPlay
+                    autoPlay={!isDialog}
+                    playsInline
                 />
             );
         }
@@ -155,7 +160,24 @@ export function OverlappingCardsSection({
                                     }}
                                     animate={{
                                         ...cardPositions[index].animate,
-                                        rotate: cardPositions[index].rotation,
+                                        rotate: [
+                                            cardPositions[index].rotation,
+                                            cardPositions[index].rotation +
+                                                (Math.random() * 2 + 1.5) *
+                                                    (index === 1 ? 1 : -1),
+                                            cardPositions[index].rotation +
+                                                (Math.random() * -1 + 0.5) *
+                                                    (index === 1 ? 1 : -1),
+                                            cardPositions[index].rotation,
+                                        ],
+                                        transition: {
+                                            rotate: {
+                                                duration:
+                                                    0.8 + Math.random() * 0.3,
+                                                ease: [0.34, 1.56, 0.64, 1],
+                                                times: [0, 0.4, 0.7, 1],
+                                            },
+                                        },
                                     }}
                                     exit={cardPositions[index].exit}
                                     transition={{
@@ -199,12 +221,72 @@ export function OverlappingCardsSection({
                                     </div>
                                 </motion.div>
                             </DialogTrigger>
-                            <DialogContent className="max-w-screen-lg w-full p-0 bg-transparent border-0">
-                                <DialogTitle className="sr-only">
-                                    {item.alt || 'Media content'}
-                                </DialogTitle>
-                                <div className="w-full aspect-video rounded-lg overflow-hidden">
-                                    {renderMedia(item, `dialog-${itemKey}`)}
+                            <DialogContent className="w-11/12 sm:w-full max-w-screen-lg p-4 sm:p-6 bg-[#F8E3C5]/90 backdrop-blur-sm border-2 border-[#F3D5A7] rounded-xl">
+                                <div className="relative">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <DialogTitle className="text-lg sm:text-xl font-semibold text-[#6B4D2E]">
+                                            {item.alt || 'Media content'}
+                                        </DialogTitle>
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() =>
+                                                    setSelectedIndex((prev) =>
+                                                        prev > 0
+                                                            ? prev - 1
+                                                            : mediaItems.length -
+                                                              1
+                                                    )
+                                                }
+                                                className="p-2 rounded-lg bg-[#F3D5A7] hover:bg-[#E3C597] text-[#6B4D2E] transition-colors"
+                                            >
+                                                <svg
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                >
+                                                    <path d="M15 18l-6-6 6-6" />
+                                                </svg>
+                                            </button>
+                                            <button
+                                                onClick={() =>
+                                                    setSelectedIndex((prev) =>
+                                                        prev <
+                                                        mediaItems.length - 1
+                                                            ? prev + 1
+                                                            : 0
+                                                    )
+                                                }
+                                                className="p-2 rounded-lg bg-[#F3D5A7] hover:bg-[#E3C597] text-[#6B4D2E] transition-colors"
+                                            >
+                                                <svg
+                                                    width="20"
+                                                    height="20"
+                                                    viewBox="0 0 24 24"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                >
+                                                    <path d="M9 18l6-6-6-6" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="w-full aspect-video rounded-xl overflow-hidden bg-black/10 border-2 border-[#F3D5A7] shadow-lg">
+                                        <AnimatePresence mode="wait">
+                                            {renderMedia(
+                                                item,
+                                                `dialog-${itemKey}`,
+                                                true
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
                             </DialogContent>
                         </Dialog>

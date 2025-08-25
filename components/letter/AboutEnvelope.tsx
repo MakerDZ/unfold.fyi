@@ -57,7 +57,7 @@ export default function AboutEnvelope() {
                             />
                             {/* Letter Section */}
                             <div className="max-w-[150px] min-[320px]:max-w-[180px] sm:max-w-[300px] md:max-w-[280px] min-w-[140px] min-[320px]:min-w-[160px] sm:min-w-[240px] md:min-w-[208px] -rotate-6 bg-[#F9DEB2] rounded-xl absolute top-0 left-16 min-[320px]:left-20 sm:left-32 md:left-36 flex flex-row items-center justify-center p-1.5 min-[320px]:p-2">
-                                <div className="text-xs sm:text-sm md:text-md relative w-full text-[#5A4B34] border-2 border-dashed border-[#E4B87B] rounded-lg py-1.5 px-2.5 break-words whitespace-pre-wrap">
+                                <div className="text-xs sm:text-sm md:text-md relative w-full text-[#6B4D2E] border-2 border-dashed border-[#E4B87B] rounded-lg py-1.5 px-2.5 break-words whitespace-pre-wrap">
                                     <span>
                                         <Image
                                             src="/images/letter-icon.png"
@@ -81,10 +81,10 @@ export default function AboutEnvelope() {
                                 />
                             </div>
                         </div>
-                        <h3 className="text-lg sm:text-xl font-bold text-[#5A4B34] pb-6 sm:pb-9">
+                        <h3 className="text-lg sm:text-xl font-bold text-[#6B4D2E] pb-6 sm:pb-9">
                             Zed
                         </h3>
-                        <p className="text-base sm:text-lg text-[#54462D] w-full md:w-3/4 overflow-y-scroll max-h-[300px] sm:h-[calc(100%-200px)] scrollbar scrollbar-thin scrollbar-thumb-[#E4B87B] scrollbar-track-[#F9DEB2] pr-4">
+                        <p className="text-base sm:text-lg text-[#6B4D2E] w-full md:w-3/4 overflow-y-scroll max-h-[300px] sm:h-[calc(100%-200px)] scrollbar scrollbar-thin scrollbar-thumb-[#E4B87B] scrollbar-track-[#F9DEB2] pr-4">
                             Lorem ipsum dolor sit amet consectetur adipisicing
                             elit. Quisquam, quos. Lorem ipsum dolor sit amet
                             consectetur adipisicing elit. Quisquam, quos. Lorem
@@ -124,7 +124,7 @@ export default function AboutEnvelope() {
                             className="rounded-full"
                         />
                         <div className="max-w-[280px] min-w-[208px] -rotate-6 bg-[#F9DEB2] rounded-xl absolute top-0 left-36 flex flex-row items-center justify-center p-2">
-                            <div className="text-md relative w-full text-[#5A4B34] border-2 border-dashed border-[#E4B87B] rounded-lg py-1.5 px-2.5 break-words whitespace-pre-wrap">
+                            <div className="text-md relative w-full text-[#6B4D2E] border-2 border-dashed border-[#E4B87B] rounded-lg py-1.5 px-2.5 break-words whitespace-pre-wrap">
                                 <span>
                                     <Image
                                         src="/images/letter-icon.png"
@@ -148,10 +148,10 @@ export default function AboutEnvelope() {
                             />
                         </div>
                     </div>
-                    <h3 className="text-xl font-bold text-[#5A4B34] pb-9">
+                    <h3 className="text-xl font-bold text-[#6B4D2E] pb-9">
                         Zed
                     </h3>
-                    <p className="text-lg text-[#54462D] w-3/4 overflow-y-scroll h-[calc(100%-200px)] scrollbar scrollbar-thin scrollbar-thumb-[#E4B87B] scrollbar-track-[#F9DEB2]">
+                    <p className="text-lg text-[#6B4D2E] w-3/4 overflow-y-scroll h-[calc(100%-200px)] scrollbar scrollbar-thin scrollbar-thumb-[#E4B87B] scrollbar-track-[#F9DEB2]">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos. Lorem ipsum dolor sit amet consectetur
                         adipisicing elit. Quisquam, quos. Lorem ipsum dolor sit

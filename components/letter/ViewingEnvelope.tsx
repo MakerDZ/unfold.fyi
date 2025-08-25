@@ -21,27 +21,19 @@ const sectionData: Section[] = [
 Remember that first project? The one where we stayed up until 4 AM, fueled by coffee and determination, just to get that one feature working perfectly. It wasn't just about the code – it was about proving to ourselves that we could do it.`,
         images: [
             {
-                url: 'https://avatars.githubusercontent.com/u/720186?v=4',
-                type: 'image' as const,
-                alt: 'Digital clock display',
-                overlay: {
-                    clock: {
-                        time: '16:25',
-                        date: '2023/10/24',
-                        day: 'Tue',
-                        label: 'GeekWall',
-                    },
-                },
+                url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+                type: 'video' as const,
+                alt: 'Big Buck Bunny',
             },
             {
-                url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
-                type: 'image' as const,
-                alt: 'Racing game with cars',
+                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4',
+                type: 'video' as const,
+                alt: 'Elephants Dream',
             },
             {
-                url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
-                type: 'image' as const,
-                alt: 'Futuristic control room',
+                url: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                type: 'video' as const,
+                alt: 'For Bigger Blazes',
             },
         ],
     },
