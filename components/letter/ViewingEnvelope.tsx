@@ -4,36 +4,133 @@ import Image from 'next/image';
 import { OverlappingCardsSection } from '../ui/photoframe';
 import { type MediaItem } from '../ui/photoframe';
 import { Play, Pause, SkipBack, SkipForward } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
-const mediaItems: MediaItem[] = [
+// Example data structure
+interface Section {
+    name: string;
+    reading: string;
+    images: MediaItem[];
+}
+
+const sectionData: Section[] = [
     {
-        url: 'https://avatars.githubusercontent.com/u/720186?v=4',
-        type: 'image' as const,
-        alt: 'Digital clock display',
-        overlay: {
-            clock: {
-                time: '16:25',
-                date: '2023/10/24',
-                day: 'Tue',
-                label: 'GeekWall',
+        name: 'The Beginning',
+        reading: `As I write this letter, I find myself reflecting on the journey that brought me here. The late nights coding, the countless debugging sessions, and the moments of pure joy when everything finally clicked into place.
+
+Remember that first project? The one where we stayed up until 4 AM, fueled by coffee and determination, just to get that one feature working perfectly. It wasn't just about the code – it was about proving to ourselves that we could do it.`,
+        images: [
+            {
+                url: 'https://avatars.githubusercontent.com/u/720186?v=4',
+                type: 'image' as const,
+                alt: 'Digital clock display',
+                overlay: {
+                    clock: {
+                        time: '16:25',
+                        date: '2023/10/24',
+                        day: 'Tue',
+                        label: 'GeekWall',
+                    },
+                },
             },
-        },
+            {
+                url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
+                type: 'image' as const,
+                alt: 'Racing game with cars',
+            },
+            {
+                url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
+                type: 'image' as const,
+                alt: 'Futuristic control room',
+            },
+        ],
     },
     {
-        url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
-        type: 'image' as const,
-        alt: 'Racing game with cars',
+        name: 'The Journey',
+        reading: `Looking at these photos now, each one tells a story. The digital clock display reminds me of our obsession with precision and timing. The racing game screenshot captures our love for optimization and performance. And that control room setup? It's a testament to how far we've come in creating intuitive interfaces.
+
+I hope you're still pushing boundaries and challenging yourself. Don't forget the excitement of learning something new, the satisfaction of solving complex problems, and the joy of creating something meaningful.`,
+        images: [
+            {
+                url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
+                type: 'image' as const,
+                alt: 'Racing game with cars',
+            },
+            {
+                url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
+                type: 'image' as const,
+                alt: 'Futuristic control room',
+            },
+            {
+                url: 'https://avatars.githubusercontent.com/u/720186?v=4',
+                type: 'image' as const,
+                alt: 'Digital clock display',
+            },
+        ],
     },
     {
-        url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
-        type: 'image' as const,
-        alt: 'Futuristic control room',
+        name: 'The Future',
+        reading: `Keep building, keep learning, and most importantly, keep enjoying the process. The best code isn't just functional – it's a form of self-expression, a way to make our mark on the digital world.
+
+And remember, whenever you feel stuck or overwhelmed, take a step back, put on your favorite coding playlist (yes, the one playing right now), and remind yourself why you fell in love with programming in the first place.
+
+Best regards,
+Your Past Self`,
+        images: [
+            {
+                url: 'https://avatars.githubusercontent.com/u/132349795?s=400&u=f082772b4220caf24a1b6e033318558a3f78d8eb&v=4',
+                type: 'image' as const,
+                alt: 'Futuristic control room',
+            },
+            {
+                url: 'https://avatars.githubusercontent.com/u/720186?v=4',
+                type: 'image' as const,
+                alt: 'Digital clock display',
+            },
+            {
+                url: 'https://avatars.githubusercontent.com/u/1574028?v=4',
+                type: 'image' as const,
+                alt: 'Racing game with cars',
+            },
+        ],
     },
 ];
 
 export default function ViewingEnvelope() {
     const [isPlaying, setIsPlaying] = useState(false);
+    const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
+    const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const index = sectionRefs.current.findIndex(
+                            (ref) => ref === entry.target
+                        );
+                        if (index !== -1) {
+                            setCurrentSectionIndex(index);
+                        }
+                    }
+                });
+            },
+            {
+                threshold: 0.5, // Trigger when 50% of the section is visible
+                rootMargin: '-100px 0px', // Adjust based on your sticky header height
+            }
+        );
+
+        sectionRefs.current.forEach((ref) => {
+            if (ref) observer.observe(ref);
+        });
+
+        return () => observer.disconnect();
+    }, []);
+
+    const setSectionRef = (el: HTMLDivElement | null, index: number) => {
+        sectionRefs.current[index] = el;
+    };
 
     return (
         <div className="w-full h-screen bg-locked-primary flex flex-col overflow-hidden">
@@ -46,7 +143,7 @@ export default function ViewingEnvelope() {
                     height={38}
                 />
                 <p className="text-lg font-bold font-itim text-[#6B4D2E]">
-                    Unfold FYI
+                    {sectionData[currentSectionIndex].name}
                 </p>
                 <div className="w-10 h-10 "></div>
             </div>
@@ -54,7 +151,7 @@ export default function ViewingEnvelope() {
             {/* Sticky Image Section */}
             <div className="w-full px-4 md:px-8 lg:px-12 md:pt-12 pt-8 bg-locked-primary sticky top-0 z-10">
                 <OverlappingCardsSection
-                    mediaItems={mediaItems}
+                    mediaItems={sectionData[currentSectionIndex].images}
                     onMediaClick={(index) => {
                         console.log(`Clicked media ${index}`);
                     }}
@@ -63,66 +160,29 @@ export default function ViewingEnvelope() {
 
             {/* Scrollable Reading Section */}
             <div className="flex-1 overflow-y-auto">
-                <div className="px-4 md:px-8 lg:px-12 pb-8">
-                    <div className="max-w-3xl mx-auto space-y-6 text-[#6B4D2E]">
-                        <h1 className="text-2xl md:text-3xl font-bold mb-6">
-                            Dear Future Self,
-                        </h1>
-
-                        <p className="text-lg leading-relaxed">
-                            As I write this letter, I find myself reflecting on
-                            the journey that brought me here. The late nights
-                            coding, the countless debugging sessions, and the
-                            moments of pure joy when everything finally clicked
-                            into place.
-                        </p>
-
-                        <p className="text-lg leading-relaxed">
-                            Remember that first project? The one where we stayed
-                            up until 4 AM, fueled by coffee and determination,
-                            just to get that one feature working perfectly. It
-                            wasn't just about the code – it was about proving to
-                            ourselves that we could do it.
-                        </p>
-
-                        <p className="text-lg leading-relaxed">
-                            Looking at these photos now, each one tells a story.
-                            The digital clock display reminds me of our
-                            obsession with precision and timing. The racing game
-                            screenshot captures our love for optimization and
-                            performance. And that control room setup? It's a
-                            testament to how far we've come in creating
-                            intuitive interfaces.
-                        </p>
-
-                        <p className="text-lg leading-relaxed">
-                            I hope you're still pushing boundaries and
-                            challenging yourself. Don't forget the excitement of
-                            learning something new, the satisfaction of solving
-                            complex problems, and the joy of creating something
-                            meaningful.
-                        </p>
-
-                        <p className="text-lg leading-relaxed">
-                            Keep building, keep learning, and most importantly,
-                            keep enjoying the process. The best code isn't just
-                            functional – it's a form of self-expression, a way
-                            to make our mark on the digital world.
-                        </p>
-
-                        <p className="text-lg leading-relaxed mb-8">
-                            And remember, whenever you feel stuck or
-                            overwhelmed, take a step back, put on your favorite
-                            coding playlist (yes, the one playing right now),
-                            and remind yourself why you fell in love with
-                            programming in the first place.
-                        </p>
-
-                        <p className="text-lg font-semibold">
-                            Best regards,
-                            <br />
-                            Your Past Self
-                        </p>
+                <div className="px-4 md:px-8 lg:px-12 pb-36">
+                    <div className="max-w-3xl mx-auto space-y-32">
+                        {sectionData.map((section, index) => (
+                            <div
+                                key={index}
+                                ref={(el) => setSectionRef(el, index)}
+                                className="space-y-6 text-[#6B4D2E]"
+                            >
+                                <h2 className="text-2xl md:text-3xl font-bold mb-6 opacity-50">
+                                    {section.name}
+                                </h2>
+                                {section.reading
+                                    .split('\n\n')
+                                    .map((paragraph, pIndex) => (
+                                        <p
+                                            key={pIndex}
+                                            className="text-lg leading-relaxed"
+                                        >
+                                            {paragraph}
+                                        </p>
+                                    ))}
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
