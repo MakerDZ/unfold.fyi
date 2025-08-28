@@ -13,7 +13,7 @@ export default function ProfileMenu() {
         <DropdownMenu>
             <DropdownMenuTrigger>
                 <Avatar className="w-9 h-9 hover:cursor-pointer">
-                    <AvatarImage src="https://github.com/shadcn.png" />
+                    <AvatarImage src="https://avatars.githubusercontent.com/u/87943692?v=4" />
                     <AvatarFallback>CN</AvatarFallback>
                 </Avatar>
             </DropdownMenuTrigger>

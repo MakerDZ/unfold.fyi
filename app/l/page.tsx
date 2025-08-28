@@ -3,5 +3,5 @@ import AboutEnvelope from '@/components/letter/AboutEnvelope';
 import ViewingEnvelope from '@/components/letter/ViewingEnvelope';
 
 export default function Letter() {
-    return <AboutEnvelope />;
+    return <Locked />;
 }
